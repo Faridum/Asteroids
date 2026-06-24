@@ -12,3 +12,6 @@ wheels/
 .venv/
 __pycache__/
 *.pyc
+
+game_state.jsonl
+game_events.jsonl
