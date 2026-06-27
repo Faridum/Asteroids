@@ -32,7 +32,6 @@ class Player(CircleShape):
     def update(self, dt: float) -> None:
         self.shoot_timer -= dt
         keys = pygame.key.get_pressed()
-
         if keys[pygame.K_a]:
             self.rotate(-dt)
         if keys[pygame.K_d]:
@@ -42,7 +41,9 @@ class Player(CircleShape):
         if keys[pygame.K_s]:
             self.move(-dt)    
         if keys[pygame.K_SPACE]:
-            self.shoot()       
+            self.shoot()
+
+        self.wrap()      
 
     def move(self, dt:float) -> None:
         unit_vector = pygame.Vector2(0, 1)

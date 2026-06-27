@@ -1,4 +1,6 @@
 import pygame
+from constants import SCREEN_HEIGHT, SCREEN_WIDTH
+
 
 
 # Base class for game objects
@@ -26,3 +28,16 @@ class CircleShape(pygame.sprite.Sprite):
     def collides_with(self, other) -> bool:
         distance = self.position.distance_to(other.position)
         return distance <= self.radius + other.radius
+    
+    def wrap(self):
+        if self.position.x > SCREEN_WIDTH + self.radius:
+            self.position.x = -self.radius
+
+        if self.position.x < -self.radius:
+            self.position.x = SCREEN_WIDTH + self.radius
+
+        if self.position.y > SCREEN_HEIGHT + self.radius:
+            self.position.y = -self.radius
+
+        if self.position.y < -self.radius:
+            self.position.y = SCREEN_HEIGHT + self.radius            
