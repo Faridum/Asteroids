@@ -1,6 +1,6 @@
 import pygame
 
-from constants import SCREEN_WIDTH, SCREEN_HEIGHT
+from constants import SCREEN_WIDTH, SCREEN_HEIGHT, CLEAR_RADIUS
 from logger import log_state, log_event
 from player import Player
 from asteroid import Asteroid
@@ -9,13 +9,15 @@ import sys
 from shot import Shot
 
 
+def clear_nearby_asteroids(player, asteroids):        
+    for asteroid in asteroids:
+        distance_sq = player.position.distance_squared_to(asteroid.position)
+        if distance_sq < CLEAR_RADIUS ** 2:
+           asteroid.kill()
+
 def main():
     pygame.init()
-
-    screen = pygame.display.set_mode(
-        (SCREEN_WIDTH, SCREEN_HEIGHT)
-    )
-    
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
     dt = 0.0
     score = 0
@@ -30,17 +32,9 @@ def main():
 
     Player.containers = (updatable, drawable)
 
-    Asteroid.containers = (
-        asteroids,
-        updatable,
-        drawable,
-    )
+    Asteroid.containers = (asteroids, updatable, drawable)
 
-    Shot.containers = (
-    shots,
-    updatable,
-    drawable,
-    )
+    Shot.containers = (shots, updatable, drawable)
 
     AsteroidField.containers = (updatable,)
 
@@ -48,8 +42,8 @@ def main():
         SCREEN_WIDTH / 2,
         SCREEN_HEIGHT / 2,
     )
-
-    asteroid_field = AsteroidField()
+    
+    AsteroidField()
     
     while True:
         log_state()
@@ -69,6 +63,7 @@ def main():
                     sys.exit()
                     
                 player.respawn()
+                clear_nearby_asteroids(player, asteroids)
 
         for asteroid in asteroids:
             for shot in shots:
@@ -90,7 +85,6 @@ def main():
         pygame.display.flip()
 
         dt = clock.tick(60) / 1000
-
 
 if __name__ == "__main__":
     main()
