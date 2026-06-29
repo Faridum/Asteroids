@@ -1,3 +1,5 @@
+<img width="691" height="478" alt="YmSwzVB-691x478" src="https://github.com/user-attachments/assets/e9aecc35-1d6c-4ee2-adee-969f094189ee" />
+
 # Asteroids Game
 
 A modern implementation of the classic **Asteroids** arcade game built with **Python** and **Pygame** as part of my Boot.dev learning journey. While following the course, I also extended the project with several gameplay improvements and refactored parts of the code to make it cleaner and easier to maintain.
