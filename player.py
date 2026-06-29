@@ -1,7 +1,7 @@
 import pygame
 
 from circleshape import CircleShape
-from constants import PLAYER_RADIUS, LINE_WIDTH, PLAYER_TURN_SPEED, PLAYER_SPEED, PLAYER_SHOOT_COOLDOWN_SECONDS
+from constants import *
 
 from shot import Shot
 from constants import PLAYER_SHOOT_SPEED
@@ -64,3 +64,11 @@ class Player(CircleShape):
             .rotate(self.rotation)
             * PLAYER_SHOOT_SPEED
         )
+
+    def respawn(self):
+        self.position = pygame.Vector2(
+        SCREEN_WIDTH / 2,
+        SCREEN_HEIGHT / 2,
+        )
+        self.rotation = 0
+        self.velocity = pygame.Vector2(0, 0)

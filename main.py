@@ -64,9 +64,11 @@ def main():
             if asteroid.collides_with(player):
                 log_event("player_hit")
                 lives -= 1
-                if lives == 0:
+                if lives <= 0:
                     print("Game over!")
                     sys.exit()
+                    
+                player.respawn()
 
         for asteroid in asteroids:
             for shot in shots:
