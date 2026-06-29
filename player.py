@@ -11,6 +11,7 @@ class Player(CircleShape):
         super().__init__(x, y, PLAYER_RADIUS)
         self.rotation = 0
         self.shoot_timer = 0.0
+        self.invincibility_timer = 3.0
 
         # in the Player class
     def triangle(self) -> list[pygame.Vector2]:
@@ -31,6 +32,7 @@ class Player(CircleShape):
 
     def update(self, dt: float) -> None:
         self.shoot_timer -= dt
+        self.invincibility_timer -= dt
         keys = pygame.key.get_pressed()
         if keys[pygame.K_a]:
             self.rotate(-dt)

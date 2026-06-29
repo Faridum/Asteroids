@@ -61,7 +61,7 @@ def main():
         updatable.update(dt)
 
         for asteroid in asteroids:
-            if asteroid.collides_with(player):
+            if (asteroid.collides_with(player) and player.invincibility_timer <= 0):
                 log_event("player_hit")
                 lives -= 1
                 if lives <= 0:
